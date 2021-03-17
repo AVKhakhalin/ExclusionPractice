@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ExclusionPractice:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ExclusionPractice_jar</output-path>
+    <root id="archive" name="ExclusionPractice.jar">
+      <element id="module-output" name="ExclusionPractice" />
+    </root>
+  </artifact>
+</component>
