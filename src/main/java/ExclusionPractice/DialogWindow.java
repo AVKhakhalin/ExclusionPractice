@@ -10,19 +10,16 @@ import java.awt.Font;
 import java.awt.event.*;
 import java.awt.FlowLayout;
 
+import static ExclusionPractice.MainApp.NUMBER_ELEMENTS_X;
+import static ExclusionPractice.MainApp.NUMBER_ELEMENTS_Y;
+
 public class DialogWindow
 {
     int sizeWidth;
     int sizeHeight;
-    int centerLocation_x;
-    int centerLocation_y;
 
-    public JTextField textField_3;
-    public JTextField textField_4;
-    public JTextField textField_7_1;
-    public JTextField textField_7_2;
-    public JTextField textField_8_1;
-    public JTextField textField_8_2;
+    JTextField[][] textField_1_;
+    String[][] arrayInputNumbers;
 
     DialogWindow (int _sizeWidth, int _sizeHeight)
     {
@@ -37,14 +34,10 @@ public class DialogWindow
         totalGUI.setBackground(new Color(200, 203, 255)); // смена фона окна
         totalGUI.setLayout(null);
 
-//        JFrame frame = new JFrame();
-//        frame.setBounds(locationX, locationY, sizeWidth, sizeHeight);
-//        frame.setVisible(true);
-
         // Добавляем текст в окно
         JLabel blueLabel = new JLabel("<html><font face=\"MyFont, Verdana, Arial\", size=\"5\"><br>" +
-                "Домашнее задание включало в себя следующее:<br>" +
-                "1. Напишите метод, на вход которого подаётся двумерный строковый массив размером 4х4. При подаче массива другого размера необходимо бросить исключение MyArraySizeException.<br><br>" +
+                "Домашнее задание №9 включало в себя следующее:<br>" +
+                "1. Напишите метод, на вход которого подаётся двумерный строковый массив размером 4х4. При подаче массива другого размера необходимо бросить исключение MyArraySizeException.<br><br><br><br><br><br><br><br><br><br><br>" +
                 "2. Далее метод должен пройтись по всем элементам массива, преобразовать в int и просуммировать. Если в каком-то элементе массива преобразование не удалось (например, в ячейке лежит символ или текст вместо числа), должно быть брошено исключение MyArrayDataException с детализацией, в какой именно ячейке лежат неверные данные.<br><br>" +
                 "3. В методе main() вызвать полученный метод, обработать возможные исключения MyArraySizeException и MyArrayDataException и вывести результат расчета.</html>");
         blueLabel.setLocation(30, 0); // координаты текста
@@ -57,16 +50,37 @@ public class DialogWindow
         // Создание кнопки для задания №1
         JButton task_1_button = new JButton("Проверить задание");
         task_1_button.setToolTipText("<html>Нажмите для проверки задания №1</html>");
-        task_1_button.setLocation(700, 80); // это координаты кнопки
+        task_1_button.setLocation(700, 103); // это координаты кнопки
         task_1_button.setSize(150,40 ); // это размер кнопки
         totalGUI.add(task_1_button);
         ActionListener actionListener1 = new TestActionListener(1); // Подключение обработчика событий к кнопке
         task_1_button.addActionListener(actionListener1);
 
+        // Создание текстовых полей для ввода слова для задания №1
+        textField_1_ = new JTextField[8][8];
+        int tempDelta_x = 30;
+        int tempDelta_y = 30;
+        int counter = 1;
+        for (int j = 0; j < NUMBER_ELEMENTS_Y; j++)
+        {
+            for (int i = 0; i < NUMBER_ELEMENTS_X; i++)
+            {
+                textField_1_[i][j] = new JTextField(3);
+                textField_1_[i][j].setToolTipText("<html>Введите символы в элемент [" + (i + 1) + "; " + (j + 1) + "] массива<br>для заданий №1, 2, 3 и нажмите соответствующую кнопку<br>\"Проверить задание\"<br>(пустая ячейка не заносится в массив, вводятся только целые числа)</html>");
+                textField_1_[i][j].setFont(new Font(Font.SANS_SERIF,Font.PLAIN,16));
+                textField_1_[i][j].setBounds(440 + tempDelta_x * i, 103 + tempDelta_y * j, 30, 30);
+                if ((i < 4) && (j < 4))
+                {
+                    textField_1_[i][j].setText(Integer.toString(counter++));
+                }
+                totalGUI.add(textField_1_[i][j]);
+            }
+        }
+
         // Создание кнопки для задания №2
         JButton task_2_button = new JButton("Проверить задание");
         task_2_button.setToolTipText("<html>Нажмите для проверки задания №2</html>");
-        task_2_button.setLocation(700, 150); // это координаты кнопки
+        task_2_button.setLocation(700, 464); // это координаты кнопки
         task_2_button.setSize(150,40 ); // это размер кнопки
         totalGUI.add(task_2_button);
         ActionListener actionListener2 = new TestActionListener(2); // Подключение обработчика событий к кнопке
@@ -75,18 +89,11 @@ public class DialogWindow
         // Создание кнопки для задания №3
         JButton task_3_button = new JButton("Проверить задание");
         task_3_button.setToolTipText("<html>Нажмите для проверки задания №3</html>");
-        task_3_button.setLocation(700, 220); // это координаты кнопки
+        task_3_button.setLocation(700, 558); // это координаты кнопки
         task_3_button.setSize(150,40 ); // это размер кнопки
         totalGUI.add(task_3_button);
         ActionListener actionListener3 = new TestActionListener(3); // Подключение обработчика событий к кнопке
         task_3_button.addActionListener(actionListener3);
-
-        // Создание текстового поля для ввода слова для задания №3
-        textField_3 = new JTextField(15);
-        textField_3.setToolTipText("<html>Введите слово для поиска в задании №3<br>и нажмите соответствующую кнопку<br>\"Проверить задание\"</html>");
-        textField_3.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,16));
-        textField_3.setBounds(500, 220, 160, 30);
-        totalGUI.add(textField_3);
 
         // Создание кнопки для выхода из программы
         JButton task_EXIT_button = new JButton("Выйти из программы");
@@ -113,18 +120,24 @@ public class DialogWindow
 
         public void actionPerformed(ActionEvent e)
         {
-            String message;
-            File newDirectory;
+            arrayInputNumbers = new String[NUMBER_ELEMENTS_X][NUMBER_ELEMENTS_Y];
+            for (int j = 0; j < NUMBER_ELEMENTS_Y; j++)
+            {
+                for (int i = 0; i < NUMBER_ELEMENTS_X; i++)
+                {
+                    arrayInputNumbers[i][j] = textField_1_[i][j].getText();
+                }
+            }
             switch (taskNumber)
             {
                 case 1:
-                    SolveTask1 solveTask1 = new SolveTask1();
+                    SolveTask1 solveTask1 = new SolveTask1(arrayInputNumbers);
                     break;
                 case 2:
-                    SolveTask2 solveTask2 = new SolveTask2();
+                    SolveTask2 solveTask2 = new SolveTask2(arrayInputNumbers);
                     break;
-                case 8:
-                    SolveTask3 solveTask3 = new SolveTask3();
+                case 3:
+                    SolveTask3 solveTask3 = new SolveTask3(arrayInputNumbers);
                     break;
                 default:
                     System.exit(0);
