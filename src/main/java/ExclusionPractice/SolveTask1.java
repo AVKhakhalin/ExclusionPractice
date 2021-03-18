@@ -60,29 +60,22 @@ public class SolveTask1 // Класс для решения задачи №1
 
         try
         {
-            for (int i = 0; i < maxNumber_x - minNumber_x + 1; i++)
+            if ((maxNumber_x - minNumber_x + 1 == 4) && (maxNumber_y - minNumber_y + 1 == 4))
             {
-                if (i < 4)
+                for (int i = 0; i < maxNumber_x - minNumber_x + 1; i++)
                 {
                     for (int j = 0; j < maxNumber_y - minNumber_y + 1; j++)
                     {
-                        if (j < 4)
-                        {
-                            resArray[i][j] = newStringArray[i][j];
-                        }
-                        else
-                        {
-                            throw new MyArraySizeException();
-                        }
+                        resArray[i][j] = newStringArray[i][j];
                     }
                 }
-                else
-                {
-                    throw new MyArraySizeException();
-                }
             }
-            System.out.println("Задан правильным массив, размерности 4x4.");
-            JOptionPane.showMessageDialog(new JFrame(), "<html><font face=\"MyFont, Verdana, Arial\", size=\"4\">Задан правильным массив, размерности 4x4.</html>", "ИНФОРМАЦИЯ", JOptionPane.INFORMATION_MESSAGE);
+            else
+            {
+                throw new MyArraySizeException();
+            }
+            System.out.println("Задан правильным двумерный строковый массив, размерности 4x4.");
+            JOptionPane.showMessageDialog(new JFrame(), "<html><font face=\"MyFont, Verdana, Arial\", size=\"4\">Задан правильным двумерный строковый массив, размерности 4x4.</html>", "ИНФОРМАЦИЯ", JOptionPane.INFORMATION_MESSAGE);
         }
         catch (MyArraySizeException e)
         {

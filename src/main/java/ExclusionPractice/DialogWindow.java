@@ -4,14 +4,10 @@ import javax.swing.*; // импортируем весь свинг, дабы н
 import java.awt.*; // и весь авт аналогично
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import java.awt.Font;
-import java.awt.event.*;
-import java.awt.FlowLayout;
 
-import static ExclusionPractice.MainApp.NUMBER_ELEMENTS_X;
-import static ExclusionPractice.MainApp.NUMBER_ELEMENTS_Y;
+import static ExclusionPractice.MainApp.*;
 
 public class DialogWindow
 {
@@ -137,7 +133,15 @@ public class DialogWindow
                     SolveTask2 solveTask2 = new SolveTask2(arrayInputNumbers);
                     break;
                 case 3:
-                    SolveTask3 solveTask3 = new SolveTask3(arrayInputNumbers);
+                    arrayForTask3 = new String[arrayInputNumbers.length][arrayInputNumbers[0].length];
+                    for (int j = 0; j < arrayInputNumbers[0].length; j++)
+                    {
+                        for (int i = 0; i < arrayInputNumbers.length; i++)
+                        {
+                            arrayForTask3[i][j] = arrayInputNumbers[i][j];
+                        }
+                    }
+                    MainApp.main(arrayInputNumbers[0]);
                     break;
                 default:
                     System.exit(0);

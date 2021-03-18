@@ -46,33 +46,26 @@ public class SolveTask2 // Класс для решения задачи №2
         int j = 0;
         try
         {
-            for (i = 0; i < maxNumber_x - minNumber_x + 1; i++)
+            if ((maxNumber_x - minNumber_x + 1 == 4) && (maxNumber_y - minNumber_y + 1 == 4))
             {
-                if (i < 4)
+                for (i = 0; i < maxNumber_x - minNumber_x + 1; i++)
                 {
                     for (j = 0; j < maxNumber_y - minNumber_y + 1; j++)
                     {
-                        if (j < 4)
+                        try
                         {
-                            try
-                            {
-                                summa += Integer.parseInt(newStringArray[i][j]);
-                            }
-                            catch(NumberFormatException e)
-                            {
-                                throw new MyArrayDataException();
-                            }
+                            summa += Integer.parseInt(newStringArray[i][j]);
                         }
-                        else
+                        catch(NumberFormatException e)
                         {
-                            throw new MyArraySizeException();
+                            throw new MyArrayDataException();
                         }
                     }
                 }
-                else
-                {
-                    throw new MyArraySizeException();
-                }
+            }
+            else
+            {
+                throw new MyArraySizeException();
             }
             System.out.println("Задан правильный массив целых чисел размерности 4x4.");
             System.out.println("Сумма всех членов массива = " + summa);
